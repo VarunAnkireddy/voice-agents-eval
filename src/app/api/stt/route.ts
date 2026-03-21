@@ -2,7 +2,7 @@ import { createClient } from "@deepgram/sdk";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const apiKey = process.env.DEEPGRAM_API_KEY;
+  const apiKey = process.env.DEEPGRAM_API_KEY ?? process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
       { error: "DEEPGRAM_API_KEY is not configured" },
