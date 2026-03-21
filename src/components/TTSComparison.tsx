@@ -28,7 +28,7 @@ const PROVIDERS = [
   {
     id: 'elevenlabs',
     label: 'ElevenLabs',
-    subtitle: 'Rachel · High fidelity',
+    subtitle: 'Adam ·Free tier available',
     endpoint: '/api/tts/elevenlabs',
     color: 'violet',
     pricing: '$0.30 / 1k chars',

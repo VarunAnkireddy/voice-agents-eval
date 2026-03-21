@@ -6,8 +6,8 @@ import { NextRequest, NextResponse } from 'next/server';
 // Adam – premade voice available on all ElevenLabs plans including free tier.
 // Library voices (e.g. Rachel) require a paid subscription.
 const DEFAULT_VOICE_ID = 'pNInz6obpgDQGcFmaJgB';
-// eleven_monolingual_v1 is the base model available on the free tier.
-const DEFAULT_MODEL_ID = 'eleven_monolingual_v1';
+// eleven_flash_v2 is the base model available on the free tier.
+const DEFAULT_MODEL_ID = 'eleven_flash_v2';
 
 export async function POST(req: NextRequest) {
   const {
