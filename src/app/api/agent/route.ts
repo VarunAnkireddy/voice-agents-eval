@@ -1,7 +1,7 @@
 // src/app/api/agent/route.ts
 // Week 3: Vercel AI SDK v6 agent with tool calling and RAG
 
-import { streamText, tool, stepCountIs } from 'ai';
+import { streamText, tool, stepCountIs, convertToModelMessages } from 'ai';
 import { openai } from '@ai-sdk/openai';
 import { z } from 'zod';
 import { searchKnowledge } from '@/lib/knowledge-base';
@@ -16,7 +16,10 @@ Use the calculate tool for any numerical queries. Keep responses concise since
 they will be converted to speech.`;
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages: uiMessages } = await req.json();
+
+  // AI SDK v6: useChat sends UIMessage[], but streamText expects ModelMessage[].
+  const messages = await convertToModelMessages(uiMessages);
 
   const result = streamText({
     model: openai('gpt-4o-mini'),
