@@ -2,7 +2,7 @@
 // Week 3: Vercel AI SDK v6 agent with tool calling and RAG
 
 import { streamText, tool, stepCountIs, convertToModelMessages } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { createGroq } from '@ai-sdk/groq';
 import { z } from 'zod';
 import { searchKnowledge } from '@/lib/knowledge-base';
 
@@ -21,8 +21,11 @@ export async function POST(req: Request) {
   // AI SDK v6: useChat sends UIMessage[], but streamText expects ModelMessage[].
   const messages = await convertToModelMessages(uiMessages);
 
+  const groq = createGroq({ apiKey: process.env.GROQ_API_KEY });
+
   const result = streamText({
-    model: openai('gpt-4o-mini'),
+    // llama-3.3-70b-versatile: free on Groq, strong tool-calling support
+    model: groq('llama-3.3-70b-versatile'),
     system: SYSTEM_PROMPT,
     messages,
     stopWhen: stepCountIs(5),
